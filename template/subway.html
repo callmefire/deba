@@ -1,0 +1,40 @@
+$def with (title,sname,ename,rule,result)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>$title</title>
+</head>
+<style type="text/css">
+#form{
+  position:absolute;
+  top:30%;
+}
+</style>
+<body>
+
+<div id="form">
+    <H3 style="text-align:center;font-family:arial;color:red">地铁线路查询系统</H3>
+    <form name="subway" action＝"http://deba.applinzi.com/subway" method="post">
+        <b>起点</b><input name="start" type="text" value=$sname><p>
+        <b>终点</b><input name="end" type="text" value=$ename><p>
+        <b>出行方案</b>
+        <select name="rule">
+            $if len(rule) == 4:
+                <option value="less" selected="selected">最少换乘</option>
+                <option value="short">最少站数</option>
+            $elif len(rule) == 5:
+                <option value="less">最少换乘</option>
+                <option value="short" selected="selected">最少站数</option>
+            $else:
+                <option value="less">最少换乘</option>
+                <option value="short">最少站数</option>
+        </select>
+        <input type="submit" value="查询"><p>
+        </form>
+        $if result != "":
+            <p>$result</p>
+</div>
+</body>
+</html>
